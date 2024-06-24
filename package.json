@@ -1,0 +1,28 @@
+{
+  "name": "salty-bets-app",
+  "productName": "salty-bets-app",
+  "version": "1.0.0",
+  "description": "Application used for salty-bets nights",
+  "workspaces": [
+    "packages/api",
+    "packages/web-app",
+    "packages/db"
+  ],
+  "scripts": {
+    "lint": "eslint --ext .ts,.tsx .",
+    "test": "vitest",
+    "dev:api": "npm run --workspace=salty-bets-api dev",
+    "dev:web-app": "npm run --workspace=salty-bets-web-app dev",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web-app\" --names \"api,web-app\" -c \"bgBlue,bgMagenta\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Caleb Mahala",
+    "email": "calebgmahala@gmail.com"
+  },
+  "license": "MIT"
+}

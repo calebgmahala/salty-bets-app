@@ -1,0 +1,50 @@
+import { Knex } from "knex";
+import { Schema } from "../types";
+
+const tableName = "players";
+export enum PlayersTableColumns {
+  ID = "id",
+  USERNAME = "username",
+  PASSWORD = "password",
+  BALANCE = "balance",
+  IS_ADMIN = "isAdmin",
+}
+
+// Used to help type the table interface
+type BaseTable = {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any -- Typing ignored since this is an intermediary type used to help define the exported table schema
+  [key in PlayersTableColumns]: any;
+};
+
+export interface PlayersTable extends BaseTable {
+  [PlayersTableColumns.ID]: number;
+  [PlayersTableColumns.USERNAME]: string;
+  [PlayersTableColumns.PASSWORD]: string;
+  [PlayersTableColumns.BALANCE]: number;
+  [PlayersTableColumns.IS_ADMIN]: boolean;
+}
+
+export type PlayersTableWithoutPassword = Omit<
+  PlayersTable,
+  PlayersTableColumns.PASSWORD
+>;
+
+export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
+  await schema.createTable(tableName, (table) => {
+    // ID for the table
+    table.increments();
+
+    table.string(PlayersTableColumns.USERNAME);
+    table.string(PlayersTableColumns.PASSWORD);
+    table.float(PlayersTableColumns.BALANCE);
+    table.boolean(PlayersTableColumns.IS_ADMIN);
+  });
+};
+
+const defaultSchema: Schema = {
+  tableName,
+  columns: PlayersTableColumns,
+  build: buildItemsTable,
+};
+
+export default defaultSchema;
