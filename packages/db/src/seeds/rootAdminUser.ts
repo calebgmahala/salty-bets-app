@@ -1,6 +1,5 @@
 import { Knex } from "knex";
 import Players, { PlayersTable } from "../schemas/players";
-
 /**
  * Seeds the database with a root admin user
  * @param knex The db connection

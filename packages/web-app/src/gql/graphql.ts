@@ -16,11 +16,26 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Item = {
+  __typename?: 'Item';
+  color?: Maybe<Scalars['String']['output']>;
+  id: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createItem: Item;
   createPlayer: Player;
   login: Scalars['String']['output'];
   logout: Player;
+};
+
+
+export type MutationCreateItemArgs = {
+  color?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  name: Scalars['String']['input'];
 };
 
 
@@ -47,8 +62,15 @@ export type Player = {
 
 export type Query = {
   __typename?: 'Query';
+  item: Item;
+  items: Array<Item>;
   player: Player;
   players: Array<Player>;
+};
+
+
+export type QueryItemArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
