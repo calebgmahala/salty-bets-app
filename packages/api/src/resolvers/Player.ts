@@ -37,7 +37,7 @@ export class PlayerResolver {
       );
     } else {
       logger.debug(
-        `${chalk.greenBright(
+        `${chalk.redBright(
           "Failed"
         )} to find player with id:  ${chalk.yellowBright(id)}`
       );
@@ -55,12 +55,22 @@ export class PlayerResolver {
     @Ctx() { knex }: ResolverContext
   ) {
     logger.debug(input, "creating player...");
-    const response = await new PlayerService({ knex }).createPlayer(input);
-    logger.debug(
-      `${chalk.greenBright("Success!")} created player ${chalk.yellowBright(
-        response[PlayersTableColumns.USERNAME]
-      )}`
-    );
-    return response;
+    try {
+      const response = await new PlayerService({ knex }).createPlayer(input);
+      logger.debug(
+        `${chalk.greenBright("Success!")} created player ${chalk.yellowBright(
+          response[PlayersTableColumns.USERNAME]
+        )}`
+      );
+      return response;
+    } catch (err) {
+      logger.debug(
+        input,
+        `${chalk.redBright("Failed")} to create player with given input`
+      );
+      throw new GraphQLError("Failed to create user with the given input", {
+        extensions: { code: "INTERNAL_SERVER_ERROR" },
+      });
+    }
   }
 }

@@ -25,7 +25,7 @@ const useCreatePlayer = () =>
 export const StupidForm = () => {
   const [createPlayer] = useCreatePlayer();
 
-  const [id, setId] = React.useState(undefined);
+  const [id, setId] = React.useState<number | undefined>(undefined);
   const [username, setPlayername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [balance, setBalance] = React.useState(0);

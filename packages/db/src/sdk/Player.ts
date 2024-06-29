@@ -45,16 +45,17 @@ export class PlayerService extends Service {
 
   createPlayer = async (
     input: CreatePlayerInput
-  ): Promise<PlayersTableWithoutPassword> => {
-    const playerArray = await this.knex<PlayersTable>(Players.tableName)
-      .insert({
+  ): Promise<PlayersTableWithoutPassword | Error> => {
+    const playerArray = await this.knex<PlayersTable>(Players.tableName).insert(
+      {
         [columns.ID]: input.id ?? null,
         [columns.USERNAME]: input.username,
         [columns.PASSWORD]: input.password,
         [columns.BALANCE]: input.balance ?? 0,
         [columns.IS_ADMIN]: false,
-      })
-      .returning(this.columnsWithoutPassword);
+      },
+      this.columnsWithoutPassword
+    );
     return playerArray[0];
   };
 }
