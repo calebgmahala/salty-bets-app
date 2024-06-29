@@ -13,7 +13,7 @@ export class PlayerResolver {
   @Query(() => [Player])
   async players(@Ctx() { knex }: ResolverContext) {
     logger.debug("getting players...");
-    const response = await new PlayerService(knex).getPlayers();
+    const response = await new PlayerService({ knex }).getPlayers();
     logger.debug(
       `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
         response.length
@@ -28,7 +28,7 @@ export class PlayerResolver {
     @Ctx() { knex }: ResolverContext
   ) {
     logger.debug({ id }, "getting player...");
-    const response = await new PlayerService(knex).getPlayer(id);
+    const response = await new PlayerService({ knex }).getPlayer(id);
     if (response) {
       logger.debug(
         `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
@@ -55,7 +55,7 @@ export class PlayerResolver {
     @Ctx() { knex }: ResolverContext
   ) {
     logger.debug(input, "creating player...");
-    const response = await new PlayerService(knex).createPlayer(input);
+    const response = await new PlayerService({ knex }).createPlayer(input);
     logger.debug(
       `${chalk.greenBright("Success!")} created player ${chalk.yellowBright(
         response[PlayersTableColumns.USERNAME]

@@ -1,9 +1,9 @@
-import { Knex } from "knex";
 import Players, {
   PlayersTable,
   PlayersTableColumns,
   PlayersTableWithoutPassword,
 } from "../schemas/players";
+import { Service, ServiceArgs } from "../types";
 
 export interface CreatePlayerInput {
   id?: number;
@@ -14,10 +14,9 @@ export interface CreatePlayerInput {
 
 const columns = PlayersTableColumns;
 
-export class PlayerService {
-  knex: Knex;
-  constructor(knex: Knex) {
-    this.knex = knex;
+export class PlayerService extends Service {
+  constructor(service: ServiceArgs) {
+    super(service);
   }
 
   columnsWithoutPassword = [

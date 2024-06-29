@@ -2,6 +2,9 @@ import { Knex } from "knex";
 import { Players, Items } from ".";
 import { Schema } from "../types";
 
+/**
+ * bets table containing information about the bets that have been placed over the course of the salty-bets night
+ */
 const tableName = "active_bets";
 export enum ActiveBetsTableColumns {
   ID = "id",

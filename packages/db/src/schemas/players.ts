@@ -1,6 +1,9 @@
 import { Knex } from "knex";
 import { Schema } from "../types";
 
+/**
+ * Players table containing information about the players of the salty-bets-night
+ */
 const tableName = "players";
 export enum PlayersTableColumns {
   ID = "id",

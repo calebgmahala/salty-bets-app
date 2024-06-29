@@ -1,6 +1,9 @@
 import { Knex } from "knex";
 import { Schema } from "../types";
 
+/**
+ * Items table containing information about the items players can bet on
+ */
 const tableName = "items";
 export enum ItemsTableColumns {
   ID = "id",
