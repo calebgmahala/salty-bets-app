@@ -3,7 +3,14 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Item {
+  color: String
+  id: Float!
+  name: String!
+}
+
 type Mutation {
+  createItem(color: String!, id: Int, name: String!): Item!
   createPlayer(balance: Float, id: Int, password: String!, username: String!): Player!
 }
 
@@ -15,6 +22,8 @@ type Player {
 }
 
 type Query {
+  item(id: Int!): Item!
+  items: [Item!]!
   player(id: Int!): Player!
   players: [Player!]!
 }

@@ -8,6 +8,6 @@ export class Item {
   @Field(() => String)
   name: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   color?: string;
 }

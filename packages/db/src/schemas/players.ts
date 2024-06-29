@@ -13,11 +13,14 @@ export enum PlayersTableColumns {
   IS_ADMIN = "isAdmin",
 }
 
+
+
 // Used to help type the table interface
 type BaseTable = {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any -- Typing ignored since this is an intermediary type used to help define the exported table schema
   [key in PlayersTableColumns]: any;
 };
+
 
 export interface PlayersTable extends BaseTable {
   [PlayersTableColumns.ID]: number;
@@ -27,10 +30,12 @@ export interface PlayersTable extends BaseTable {
   [PlayersTableColumns.IS_ADMIN]: boolean;
 }
 
+
 export type PlayersTableWithoutPassword = Omit<
   PlayersTable,
   PlayersTableColumns.PASSWORD
 >;
+
 
 export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
   await schema.createTable(tableName, (table) => {

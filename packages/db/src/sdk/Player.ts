@@ -3,6 +3,9 @@ import Players, {
   PlayersTableColumns,
   PlayersTableWithoutPassword,
 } from "../schemas/players";
+
+
+
 import { Service, ServiceArgs } from "../types";
 
 export interface CreatePlayerInput {
@@ -42,6 +45,8 @@ export class PlayerService extends Service {
       .where({ [columns.ID]: id });
     return players[0];
   };
+
+
 
   createPlayer = async (
     input: CreatePlayerInput
