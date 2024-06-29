@@ -11,7 +11,7 @@ import { GraphQLError } from "graphql";
 @Resolver(Player)
 export class PlayerResolver {
   @Query(() => [Player])
-  async players(@Ctx() { knex, user }: ResolverContext) {
+  async players(@Ctx() { knex }: ResolverContext) {
     logger.debug("getting players...");
     const response = await new PlayerService({ knex }).getPlayers();
     logger.debug(
