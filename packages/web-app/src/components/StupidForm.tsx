@@ -40,7 +40,6 @@ export const StupidForm = () => {
       },
     });
   }, [createPlayer, username, password, balance]);
-
   return (
     <>
       ID (optional){" "}
