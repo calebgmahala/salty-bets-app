@@ -16,6 +16,7 @@
     "uuid": "^10.0.0"
   },
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "build": "vite-node ./scripts/buildDb.ts",
     "delete": "vite-node ./scripts/deleteDb.ts",
     "reset": "npm run delete && npm run build",

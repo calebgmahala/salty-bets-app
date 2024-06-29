@@ -1,8 +1,4 @@
-import Players, {
-  PlayersTable,
-  PlayersTableColumns,
-  PlayersTableWithoutPrivateInfo,
-} from "../schemas/players";
+import Players, { PlayersTable, PlayersTableColumns } from "../schemas/players";
 import { Service, ServiceArgs } from "../types";
 import { v4 as uuidv4 } from "uuid";
 

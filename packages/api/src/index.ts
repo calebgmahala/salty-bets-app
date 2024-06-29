@@ -5,10 +5,6 @@ import { buildSchema } from "type-graphql";
 import { Resolvers } from "./resolvers";
 import knex from "../../db/src/knexConnection";
 import chalk from "chalk";
-import {
-  PlayersTable,
-  PlayersTableColumns,
-} from "../../db/src/schemas/players";
 import { authChecker } from "../utils/auth";
 
 export interface ResolverContext extends BaseContext {

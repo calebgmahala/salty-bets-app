@@ -22,6 +22,7 @@
     "typescript": "~4.7.0"
   },
   "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "vite-node ./src/index.ts",
     "dev": "vite-node --watch ./src/index.ts",
     "test": "vitest"
