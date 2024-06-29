@@ -13,8 +13,6 @@ export enum PlayersTableColumns {
   IS_ADMIN = "isAdmin",
 }
 
-
-
 // Used to help type the table interface
 type BaseTable = {
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any -- Typing ignored since this is an intermediary type used to help define the exported table schema
