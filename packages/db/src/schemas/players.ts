@@ -32,7 +32,6 @@ export type PlayersTableWithoutPassword = Omit<
   PlayersTableColumns.PASSWORD
 >;
 
-
 export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
   await schema.createTable(tableName, (table) => {
     // ID for the table
