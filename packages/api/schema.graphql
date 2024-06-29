@@ -10,7 +10,7 @@ type Item {
 }
 
 type Mutation {
-  createItem(color: String!, id: Int, name: String!): Item!
+  createItem(color: String, id: Int, name: String!): Item!
   createPlayer(balance: Float, id: Int, password: String!, username: String!): Player!
   login(password: String!, username: String!): String!
   logout: Player!

@@ -33,7 +33,7 @@ export type Mutation = {
 
 
 export type MutationCreateItemArgs = {
-  color: Scalars['String']['input'];
+  color?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   name: Scalars['String']['input'];
 };
