@@ -1,4 +1,13 @@
-import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Args,
+  Authorized,
+  Ctx,
+  Int,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { Player } from "../dtos/Player";
 import { PlayerService } from "../../../db/src/sdk/Player";
 import { ResolverContext } from "..";
@@ -11,7 +20,7 @@ import { GraphQLError } from "graphql";
 @Resolver(Player)
 export class PlayerResolver {
   @Query(() => [Player])
-  async players(@Ctx() { knex }: ResolverContext) {
+  async players(@Ctx() { knex, user }: ResolverContext) {
     logger.debug("getting players...");
     const response = await new PlayerService({ knex }).getPlayers();
     logger.debug(

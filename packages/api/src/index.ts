@@ -14,9 +14,7 @@ import { authChecker } from "../utils/auth";
 export interface ResolverContext extends BaseContext {
   knex: typeof knex;
   user: {
-    id: PlayersTable[PlayersTableColumns.ID];
-    doesExist: boolean;
-    isAdmin: PlayersTable[PlayersTableColumns.IS_ADMIN];
+    loginToken: string;
   };
 }
 
@@ -29,7 +27,7 @@ async function bootstrap() {
   });
 
   // Create GraphQL server
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer<ResolverContext>({ schema });
 
   // HMR hooks
   if (import.meta.hot) {
@@ -47,8 +45,13 @@ async function bootstrap() {
   // Start server
   await startStandaloneServer(server, {
     listen: { port: 4000 },
-    context: async () => {
-      return { knex };
+    context: async ({ req }) => {
+      return {
+        knex,
+        user: {
+          loginToken: req.headers.authorization,
+        },
+      };
     },
   });
 }

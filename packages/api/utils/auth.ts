@@ -1,20 +1,46 @@
 import { AuthChecker } from "type-graphql";
 import { ResolverContext } from "../src";
+import { AuthenticationService } from "../../db/src/sdk/Authentication";
+import { logger } from "./logger";
+import chalk from "chalk";
+import { PlayersTableColumns } from "../../db/src/schemas/players";
 
 export enum Roles {
   ADMIN = "ADMIN",
 }
 
-export const authChecker: AuthChecker<ResolverContext, Roles> = (
-  { context },
+const logFailedToAuthenticateUserMessage = (token) =>
+  logger.debug({ token }, `${chalk.redBright("Failed")} to authenticate user}`);
+
+export const authChecker: AuthChecker<ResolverContext, Roles> = async (
+  { context: { knex, user } },
   roles
 ) => {
-  if (!context.user.doesExist) {
+  if (!user.loginToken) {
+    logFailedToAuthenticateUserMessage(user.loginToken);
     return false;
   }
-  let resp = true;
-  if (roles.includes(Roles.ADMIN)) {
-    resp = !context.user.isAdmin;
+  const foundUser = await new AuthenticationService({
+    knex,
+  }).findUserBasedOnToken(user.loginToken);
+
+  if (!foundUser) {
+    logFailedToAuthenticateUserMessage(user.loginToken);
+    return false;
   }
-  return resp;
+
+  if (roles.includes(Roles.ADMIN)) {
+    if (!foundUser[PlayersTableColumns.IS_ADMIN]) {
+      logFailedToAuthenticateUserMessage(user.loginToken);
+      return false;
+    }
+  }
+
+  logger.debug(
+    `${chalk.greenBright("Success!")} authenticated user ${chalk.yellowBright(
+      foundUser[PlayersTableColumns.USERNAME]
+    )}`
+  );
+
+  return true;
 };

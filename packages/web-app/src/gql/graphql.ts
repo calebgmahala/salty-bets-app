@@ -19,12 +19,19 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   createPlayer: Player;
+  login: Player;
 };
 
 
 export type MutationCreatePlayerArgs = {
   balance?: InputMaybe<Scalars['Float']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
+};
+
+
+export type MutationLoginArgs = {
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
 };
