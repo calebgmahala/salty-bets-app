@@ -3,4 +3,3 @@ import { PlayerResolver } from "./Player";
 import { ItemResolver } from "./Item";
 
 export const Resolvers: BuildSchemaOptions["resolvers"] = [PlayerResolver, ItemResolver];
-//add resolvers here
