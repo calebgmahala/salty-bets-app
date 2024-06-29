@@ -19,7 +19,8 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   createPlayer: Player;
-  login: Player;
+  login: Scalars['String']['output'];
+  logout: Player;
 };
 
 

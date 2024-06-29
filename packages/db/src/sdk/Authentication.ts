@@ -40,6 +40,16 @@ export class AuthenticationService extends Service {
     return playerArray[0];
   };
 
+  logout = async (
+    token: PlayersTable[PlayersTableColumns.LOGIN_TOKEN]
+  ): Promise<PlayersTable> => {
+    const players = await this.knex<PlayersTable>(Players.tableName)
+      .select()
+      .where({ [columns.LOGIN_TOKEN]: token })
+      .update({ loginToken: null }, this.columns);
+    return players[0];
+  };
+
   findUserBasedOnToken = async (
     token: PlayersTable[PlayersTableColumns.LOGIN_TOKEN]
   ): Promise<PlayersTable | undefined> => {
