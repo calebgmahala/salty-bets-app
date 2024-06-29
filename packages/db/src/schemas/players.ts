@@ -19,7 +19,6 @@ type BaseTable = {
   [key in PlayersTableColumns]: any;
 };
 
-
 export interface PlayersTable extends BaseTable {
   [PlayersTableColumns.ID]: number;
   [PlayersTableColumns.USERNAME]: string;
