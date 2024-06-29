@@ -3,9 +3,6 @@ import Players, {
   PlayersTableColumns,
   PlayersTableWithoutPassword,
 } from "../schemas/players";
-
-
-
 import { Service, ServiceArgs } from "../types";
 
 export interface CreatePlayerInput {
