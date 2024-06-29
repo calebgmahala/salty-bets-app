@@ -43,8 +43,6 @@ export class PlayerService extends Service {
     return players[0];
   };
 
-
-
   createPlayer = async (
     input: CreatePlayerInput
   ): Promise<PlayersTableWithoutPassword | Error> => {
