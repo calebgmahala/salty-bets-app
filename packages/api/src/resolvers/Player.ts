@@ -1,13 +1,4 @@
-import {
-  Arg,
-  Args,
-  Authorized,
-  Ctx,
-  Int,
-  Mutation,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Args, Ctx, Int, Mutation, Query, Resolver } from "type-graphql";
 import { Player } from "../dtos/Player";
 import { PlayerService } from "../../../db/src/sdk/Player";
 import { ResolverContext } from "..";
