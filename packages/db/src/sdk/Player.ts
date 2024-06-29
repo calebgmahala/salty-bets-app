@@ -1,7 +1,7 @@
 import Players, {
   PlayersTable,
   PlayersTableColumns,
-  PlayersTableWithoutPassword,
+  PlayersTableWithoutPrivateInfo,
 } from "../schemas/players";
 import { Service, ServiceArgs } from "../types";
 
@@ -19,25 +19,25 @@ export class PlayerService extends Service {
     super(service);
   }
 
-  columnsWithoutPassword = [
+  columnsWithoutPrivateInfo = [
     columns.ID,
     columns.USERNAME,
     columns.BALANCE,
     columns.IS_ADMIN,
   ];
 
-  getPlayers = async (): Promise<PlayersTableWithoutPassword[]> => {
+  getPlayers = async (): Promise<PlayersTableWithoutPrivateInfo[]> => {
     const players = await this.knex<PlayersTable>(Players.tableName)
-      .column(...this.columnsWithoutPassword)
+      .column(...this.columnsWithoutPrivateInfo)
       .select();
     return players;
   };
 
   getPlayer = async (
     id: PlayersTable[PlayersTableColumns.ID]
-  ): Promise<PlayersTableWithoutPassword | undefined> => {
+  ): Promise<PlayersTableWithoutPrivateInfo | undefined> => {
     const players = await this.knex<PlayersTable>(Players.tableName)
-      .column(...this.columnsWithoutPassword)
+      .column(...this.columnsWithoutPrivateInfo)
       .select()
       .where({ [columns.ID]: id });
     return players[0];
@@ -45,7 +45,7 @@ export class PlayerService extends Service {
 
   createPlayer = async (
     input: CreatePlayerInput
-  ): Promise<PlayersTableWithoutPassword | Error> => {
+  ): Promise<PlayersTableWithoutPrivateInfo | Error> => {
     const playerArray = await this.knex<PlayersTable>(Players.tableName).insert(
       {
         [columns.ID]: input.id ?? null,
@@ -54,7 +54,7 @@ export class PlayerService extends Service {
         [columns.BALANCE]: input.balance ?? 0,
         [columns.IS_ADMIN]: false,
       },
-      this.columnsWithoutPassword
+      this.columnsWithoutPrivateInfo
     );
     return playerArray[0];
   };

@@ -5,6 +5,8 @@
 
 type Mutation {
   createPlayer(balance: Float, id: Int, password: String!, username: String!): Player!
+  login(password: String!, username: String!): String!
+  logout: Player!
 }
 
 type Player {

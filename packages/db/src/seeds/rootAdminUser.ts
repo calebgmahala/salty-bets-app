@@ -13,5 +13,6 @@ export const seedRootAdmin = async (knex: Knex) => {
     [columns.PASSWORD]: "root",
     [columns.BALANCE]: 0,
     [columns.IS_ADMIN]: true,
+    [columns.LOGIN_TOKEN]: null,
   });
 };

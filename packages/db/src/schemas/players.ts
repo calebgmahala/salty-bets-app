@@ -11,6 +11,7 @@ export enum PlayersTableColumns {
   PASSWORD = "password",
   BALANCE = "balance",
   IS_ADMIN = "isAdmin",
+  LOGIN_TOKEN = "loginToken",
 }
 
 // Used to help type the table interface
@@ -25,11 +26,12 @@ export interface PlayersTable extends BaseTable {
   [PlayersTableColumns.PASSWORD]: string;
   [PlayersTableColumns.BALANCE]: number;
   [PlayersTableColumns.IS_ADMIN]: boolean;
+  [PlayersTableColumns.LOGIN_TOKEN]: string;
 }
 
-export type PlayersTableWithoutPassword = Omit<
+export type PlayersTableWithoutPrivateInfo = Omit<
   PlayersTable,
-  PlayersTableColumns.PASSWORD
+  PlayersTableColumns.PASSWORD | PlayersTableColumns.LOGIN_TOKEN
 >;
 
 export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
@@ -41,6 +43,7 @@ export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
     table.string(PlayersTableColumns.PASSWORD);
     table.float(PlayersTableColumns.BALANCE);
     table.boolean(PlayersTableColumns.IS_ADMIN);
+    table.string(PlayersTableColumns.LOGIN_TOKEN);
   });
 };
 

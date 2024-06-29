@@ -1,8 +1,8 @@
 import { Field, Float, ObjectType } from "type-graphql";
-import { PlayersTableWithoutPassword } from "../../../../db/src/schemas/players";
+import { PlayersTableWithoutPrivateInfo } from "../../../../db/src/schemas/players";
 
 @ObjectType()
-export class Player implements PlayersTableWithoutPassword {
+export class Player implements PlayersTableWithoutPrivateInfo {
   @Field(() => Number)
   id: number;
 
