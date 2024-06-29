@@ -9,15 +9,14 @@
     "packages/db"
   ],
   "scripts": {
+    "prepare": "husky",
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "typecheck": "npm run --workspaces typecheck",
-    "postinstall": "husky install",
     "test": "vitest",
     "dev:api": "npm run --workspace=salty-bets-api dev",
     "dev:web-app": "npm run --workspace=salty-bets-web-app dev",
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web-app\" --names \"api,web-app\" -c \"bgBlue,bgMagenta\"",
-    "prepare": "husky"
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web-app\" --names \"api,web-app\" -c \"bgBlue,bgMagenta\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.14.1",
