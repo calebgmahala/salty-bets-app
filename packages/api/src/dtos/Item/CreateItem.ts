@@ -9,7 +9,7 @@ export class CreateItemInput implements SDKCreateItemInput {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  color: string;
+  @Field(() => String, { nullable: true })
+  color?: string;
 
 }

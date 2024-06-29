@@ -23,8 +23,6 @@ export interface ItemsTable extends BaseTable {
   [ItemsTableColumns.COLOR]: string;
 }
 
-export type ColumnsDefault = ItemsTable;
-
 export const buildItemsTable = async (schema: Knex.SchemaBuilder) => {
   await schema.createTable(tableName, (table) => {
     // ID for the table

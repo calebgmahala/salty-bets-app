@@ -1,8 +1,7 @@
  
   import Items, {
     ItemsTable,
-  ItemsTableColumns,
-  ColumnsDefault
+  ItemsTableColumns
 } from "../schemas/items";
 
 
@@ -12,7 +11,7 @@ import { Service, ServiceArgs } from "../types";
 export interface CreateItemInput {
   id?: number;
   name: string;
-  color: string;
+  color?: string;
 }
 
 const columns = ItemsTableColumns;
@@ -28,7 +27,7 @@ export class ItemService extends Service {
   ];
 
 
-  getItems = async (): Promise<ColumnsDefault[]> => {
+  getItems = async (): Promise<ItemsTable[]> => {
     const items = await this.knex<ItemsTable>(Items.tableName)
       .column(...this.columnsDefault)
       .select();
@@ -37,7 +36,7 @@ export class ItemService extends Service {
 
   getItem = async (
     id: ItemsTable[ItemsTableColumns.ID]
-  ): Promise<ColumnsDefault | undefined> => {
+  ): Promise<ItemsTable | undefined> => {
     const items = await this.knex<ItemsTable>(Items.tableName)
       .column(...this.columnsDefault)
       .select()
@@ -49,12 +48,12 @@ export class ItemService extends Service {
 
   createItem = async (
     input: CreateItemInput
-  ): Promise<ColumnsDefault | Error> => {
+  ): Promise<ItemsTable | Error> => {
     const ItemArray = await this.knex<ItemsTable>(Items.tableName).insert(
       {
         [columns.ID]: input.id ?? null,
         [columns.NAME]: input.name,
-        [columns.COLOR]: input.color
+        [columns.COLOR]: input.color ?? null
       },
       this.columnsDefault
     );
