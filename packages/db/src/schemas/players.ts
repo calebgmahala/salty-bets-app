@@ -27,7 +27,6 @@ export interface PlayersTable extends BaseTable {
   [PlayersTableColumns.IS_ADMIN]: boolean;
 }
 
-
 export type PlayersTableWithoutPassword = Omit<
   PlayersTable,
   PlayersTableColumns.PASSWORD
