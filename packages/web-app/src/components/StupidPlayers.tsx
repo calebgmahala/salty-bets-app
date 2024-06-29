@@ -13,13 +13,8 @@ const USERS = gql`
   }
 `;
 const usePlayers = () => useQuery<PlayersQuery>(USERS);
-
-//const useLazyPlayers = () => useLazyQuery<PlayersQuery>(USERS);
-
 export const StupidPlayers = () => {
   const { data, refetch } = usePlayers();
-  //const [getPlayers, {data}] = useLazyPlayers();
-
   return (
     <div>
       {data?.players?.map(({ id, username, balance, isAdmin }) => (
@@ -28,9 +23,7 @@ export const StupidPlayers = () => {
           <span>Username: {username}</span>
           <span>Balance: {balance}</span>
           <span>Is Admin: {isAdmin}</span>
-          
         </div>
-        
       ))}
       <button onClick={
         () => refetch()
