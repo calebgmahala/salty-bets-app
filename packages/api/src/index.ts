@@ -5,9 +5,19 @@ import { buildSchema } from "type-graphql";
 import { Resolvers } from "./resolvers";
 import knex from "../../db/src/knexConnection";
 import chalk from "chalk";
+import {
+  PlayersTable,
+  PlayersTableColumns,
+} from "../../db/src/schemas/players";
+import { authChecker } from "../utils/auth";
 
 export interface ResolverContext extends BaseContext {
   knex: typeof knex;
+  user: {
+    id: PlayersTable[PlayersTableColumns.ID];
+    doesExist: boolean;
+    isAdmin: PlayersTable[PlayersTableColumns.IS_ADMIN];
+  };
 }
 
 async function bootstrap() {
@@ -15,6 +25,7 @@ async function bootstrap() {
   const schema = await buildSchema({
     resolvers: Resolvers,
     emitSchemaFile: true,
+    authChecker,
   });
 
   // Create GraphQL server
