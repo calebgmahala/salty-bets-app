@@ -1,6 +1,7 @@
 import React from "react";
 import { useMutation, gql } from "@apollo/client";
 import { CreatePlayerMutation, MutationCreatePlayerArgs } from "../gql/graphql";
+import { StupidPlayers } from "./StupidPlayers";
 
 const CREATE_USER = gql`
   mutation CreatePlayer(
@@ -22,6 +23,7 @@ const CREATE_USER = gql`
 const useCreatePlayer = () =>
   useMutation<CreatePlayerMutation, MutationCreatePlayerArgs>(CREATE_USER);
 
+
 export const StupidForm = () => {
   const [createPlayer] = useCreatePlayer();
 
@@ -39,6 +41,25 @@ export const StupidForm = () => {
         balance,
       },
     });
+  }, [createPlayer, username, password, balance]);
+
+  const reloadNow = React.useCallback(() =>{
+    // fetch(
+    //     "http://localhost:3000/create_user",
+    
+    //     {
+    //         method: "PUT",
+    //         headers: {
+    //                     "Content-Type": "application/json",
+    //                   },
+    //         body: JSON.stringify( { id: id, name: name, lastName: lastName})
+
+    //     }).then((res) => console.log(res)) 
+    console.log("test")
+    //StupidPlayers()
+    window.location.reload();
+
+       
   }, [createPlayer, username, password, balance]);
 
   return (
@@ -68,6 +89,7 @@ export const StupidForm = () => {
         onChange={(e) => setBalance(parseInt(e.target.value))}
       ></input>
       <button onClick={onFormSubmit}>Submit</button>
+      {/* <button onClick={reloadNow}>load database</button> */}
     </>
   );
 };
