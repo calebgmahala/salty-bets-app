@@ -10,6 +10,7 @@ export enum ItemsTableColumns {
   NAME = "name",
   COLOR = "color",
 }
+export const allItemsTableColumns = Object.values(ItemsTableColumns);
 
 // Used to help type the table interface
 type BaseTable = {

@@ -4,18 +4,18 @@ For more information about how this package integrates with the main app, please
 
 What should not be in here:
 
-- Logic used outside of formatting db calls or collecting db from the data
+- Logic used outside of formatting db calls or collecting data from the db
 - API calls
 
 ## Directory Structure
 
 ### scripts
 
-Various one off scripts mainly for db creation / seeding / mutations
+Various one off scripts mainly for db creation / seeding / mutations / tests
 
 ### src/schemas
 
-Table schemas including typescript types for columns and data types, create table commands, and other db structure related items.
+Table schemas including typescript types for columns and their data types, create table commands, and other db structure related items.
 
 New schemas should export a default object of the type `Schema` interface found in [src/types.ts](src/types.ts). New Schema's also need added to the [src/schemas/index.ts](src/schemas/index.ts) file to insure that db initializer scripts can properly loop over all the schemas
 
@@ -40,6 +40,8 @@ npm run build
 Currently no tests have been build for this package
 
 ## Relevant Scripts
+
+Please note that if running these commands from the project root, the `--workspace=salty-bets-db` flag needs added
 
 Builds the DB based on the defined schema's and seeds it. Command will skip if the DB already exists
 
