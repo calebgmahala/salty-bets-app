@@ -45,7 +45,7 @@ export class PlayerService extends Service {
 
   createPlayer = async (
     input: CreatePlayerInput
-  ): Promise<PlayersTableWithoutPrivateInfo | Error> => {
+  ): Promise<PlayersTableWithoutPrivateInfo> => {
     const playerArray = await this.knex<PlayersTable>(Players.tableName).insert(
       {
         [columns.ID]: input.id ?? null,

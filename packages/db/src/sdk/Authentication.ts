@@ -1,4 +1,8 @@
-import Players, { PlayersTable, PlayersTableColumns } from "../schemas/players";
+import Players, {
+  PlayersTable,
+  PlayersTableColumns,
+  allPlayersTableColumns,
+} from "../schemas/players";
 import { Service, ServiceArgs } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -16,15 +20,6 @@ export class AuthenticationService extends Service {
     super(service);
   }
 
-  columns = [
-    columns.ID,
-    columns.USERNAME,
-    columns.PASSWORD,
-    columns.BALANCE,
-    columns.IS_ADMIN,
-    columns.LOGIN_TOKEN,
-  ];
-
   login = async (input: LoginInput): Promise<PlayersTable> => {
     const token = uuidv4();
     const playerArray = await this.knex<PlayersTable>(Players.tableName)
@@ -32,7 +27,7 @@ export class AuthenticationService extends Service {
         [columns.USERNAME]: input.username,
         [columns.PASSWORD]: input.password,
       })
-      .update({ loginToken: token }, this.columns);
+      .update({ loginToken: token }, allPlayersTableColumns);
     return playerArray[0];
   };
 
@@ -42,7 +37,7 @@ export class AuthenticationService extends Service {
     const players = await this.knex<PlayersTable>(Players.tableName)
       .select()
       .where({ [columns.LOGIN_TOKEN]: token })
-      .update({ loginToken: null }, this.columns);
+      .update({ loginToken: null }, allPlayersTableColumns);
     return players[0];
   };
 
@@ -50,7 +45,7 @@ export class AuthenticationService extends Service {
     token: PlayersTable[PlayersTableColumns.LOGIN_TOKEN]
   ): Promise<PlayersTable | undefined> => {
     const players = await this.knex<PlayersTable>(Players.tableName)
-      .column(...this.columns)
+      .column(...allPlayersTableColumns)
       .select()
       .where({ [columns.LOGIN_TOKEN]: token });
     return players[0];
