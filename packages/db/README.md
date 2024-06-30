@@ -41,7 +41,7 @@ Currently no tests have been build for this package
 
 ## Relevant Scripts
 
-Please note that if running these commands from the project root, the `--workspace=salty-bets-db` flag needs added
+Please note that if you are running these commands from the project root, the `--workspace=salty-bets-db` flag needs added
 
 Builds the DB based on the defined schema's and seeds it. Command will skip if the DB already exists
 
