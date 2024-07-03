@@ -5,6 +5,7 @@ import { logger } from "./logger";
 import chalk from "chalk";
 import { PlayersTableColumns } from "../../db/src/schemas/players";
 
+// Roles that the app can pass into @Authorized decorator
 export enum Roles {
   ADMIN = "ADMIN",
 }
@@ -13,7 +14,7 @@ const logFailedToAuthenticateUserMessage = (token) =>
   logger.debug({ token }, `${chalk.redBright("Failed")} to authenticate user}`);
 
 /**
- * Authentication function to run on @Authenticated decorated query requests
+ * Authentication function to run on @Authorized decorated query requests
  * @param param0 Context object containing the user login token and the db connection object
  * @param roles List of roles that the request expects the user to have
  * @returns Whether or not to allow the user to make the request
