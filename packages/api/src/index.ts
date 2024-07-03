@@ -40,7 +40,7 @@ async function bootstrap() {
 
   // Start server
   await startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { port: import.meta.env.VITE_PORT ?? 4000 },
     context: async ({ req }) => {
       return {
         knex,

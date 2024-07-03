@@ -18,14 +18,14 @@ export class AuthenticationResolver {
     logger.debug(input, "logging in...");
     const response = await new AuthenticationService({ knex }).login(input);
     if (response) {
-      logger.debug(
+      logger.info(
         `${chalk.greenBright("Success!")} logged in player ${chalk.yellowBright(
           response[PlayersTableColumns.USERNAME]
         )}`
       );
       return response[PlayersTableColumns.LOGIN_TOKEN];
     } else {
-      logger.debug(
+      logger.error(
         input,
         `${chalk.redBright("Failed")} to login player with given input`
       );
@@ -45,7 +45,7 @@ export class AuthenticationResolver {
       user.loginToken
     );
     if (response) {
-      logger.debug(
+      logger.info(
         `${chalk.greenBright(
           "Success!"
         )} logged out player ${chalk.yellowBright(
@@ -54,7 +54,7 @@ export class AuthenticationResolver {
       );
       return response;
     } else {
-      logger.debug(
+      logger.error(
         { token: user.loginToken },
         `${chalk.redBright("Failed")} to log out player`
       );
