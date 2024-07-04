@@ -10,6 +10,11 @@ import { GraphQLError } from "graphql";
 
 @Resolver()
 export class AuthenticationResolver {
+  /**
+   * Login function for users
+   * @param input The login credentials for the user
+   * @returns a token to be passed along with subsequent requests
+   */
   @Mutation(() => String)
   async login(
     @Args(() => LoginInput) input: LoginInput,
@@ -17,18 +22,21 @@ export class AuthenticationResolver {
   ) {
     logger.debug(input, "logging in...");
     const response = await new AuthenticationService({ knex }).login(input);
+
     if (response) {
       logger.debug(
         `${chalk.greenBright("Success!")} logged in player ${chalk.yellowBright(
           response[PlayersTableColumns.USERNAME]
         )}`
       );
+
       return response[PlayersTableColumns.LOGIN_TOKEN];
     } else {
       logger.debug(
         input,
         `${chalk.redBright("Failed")} to login player with given input`
       );
+
       throw new GraphQLError(
         "Login failed, please check your credentials and try again",
         {
@@ -38,12 +46,17 @@ export class AuthenticationResolver {
     }
   }
 
+  /**
+   * Ends the session for the given user
+   * @returns The player that was logged out
+   */
   @Mutation(() => Player)
   async logout(@Ctx() { knex, user }: ResolverContext) {
     logger.debug({ token: user.loginToken }, "logging out...");
     const response = await new AuthenticationService({ knex }).logout(
       user.loginToken
     );
+
     if (response) {
       logger.debug(
         `${chalk.greenBright(
@@ -52,12 +65,14 @@ export class AuthenticationResolver {
           response[PlayersTableColumns.USERNAME]
         )}`
       );
+
       return response;
     } else {
       logger.debug(
         { token: user.loginToken },
         `${chalk.redBright("Failed")} to log out player`
       );
+
       throw new GraphQLError("Log out failed", {
         extensions: { code: "LOGIN_FAILED" },
       });
