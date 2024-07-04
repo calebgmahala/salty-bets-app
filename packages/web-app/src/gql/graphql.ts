@@ -21,7 +21,7 @@ export type Scalars = {
 export type Fighter = {
   __typename?: 'Fighter';
   bestStreak: Scalars['Int']['output'];
-  createTime: Scalars['DateTimeISO']['output'];
+  createdTime: Scalars['DateTimeISO']['output'];
   elo: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
   lastUpdated: Scalars['DateTimeISO']['output'];
@@ -36,6 +36,25 @@ export type Item = {
   color?: Maybe<Scalars['String']['output']>;
   id: Scalars['Float']['output'];
   name: Scalars['String']['output'];
+};
+
+export type Match = {
+  __typename?: 'Match';
+  betBlue: Scalars['Float']['output'];
+  betRed: Scalars['Float']['output'];
+  colour: Scalars['String']['output'];
+  date: Scalars['DateTimeISO']['output'];
+  fighterBlue: Fighter;
+  fighterBlueId: Scalars['Int']['output'];
+  fighterRed: Fighter;
+  fighterRedId: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  matchFormat: Scalars['String']['output'];
+  streakBlue: Scalars['Int']['output'];
+  streakRed: Scalars['Int']['output'];
+  tier: Scalars['String']['output'];
+  winner: Fighter;
+  winnerId: Scalars['Int']['output'];
 };
 
 export type Mutation = {
@@ -78,6 +97,7 @@ export type Player = {
 export type Query = {
   __typename?: 'Query';
   getFighter: Fighter;
+  getMatch: Match;
   item: Item;
   items: Array<Item>;
   player: Player;
@@ -86,6 +106,11 @@ export type Query = {
 
 
 export type QueryGetFighterArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryGetMatchArgs = {
   id: Scalars['Int']['input'];
 };
 
