@@ -3,10 +3,45 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
+"""
+scalar DateTimeISO
+
+type Fighter {
+  bestStreak: Int!
+  createdTime: DateTimeISO!
+  elo: Int!
+  id: ID!
+  lastUpdated: DateTimeISO!
+  name: String!
+  prevTier: String!
+  tier: String!
+  tierElo: Int!
+}
+
 type Item {
   color: String
   id: Float!
   name: String!
+}
+
+type Match {
+  betBlue: Float!
+  betRed: Float!
+  colour: String!
+  date: DateTimeISO!
+  fighterBlue: Fighter!
+  fighterBlueId: Int!
+  fighterRed: Fighter!
+  fighterRedId: Int!
+  id: ID!
+  matchFormat: String!
+  streakBlue: Int!
+  streakRed: Int!
+  tier: String!
+  winner: Fighter!
+  winnerId: Int!
 }
 
 type Mutation {
@@ -24,6 +59,8 @@ type Player {
 }
 
 type Query {
+  getFighter(id: Int!): Fighter!
+  getMatch(id: Int!): Match!
   item(id: Int!): Item!
   items: [Item!]!
   player(id: Int!): Player!
