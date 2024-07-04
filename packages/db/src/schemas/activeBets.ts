@@ -12,6 +12,7 @@ export enum ActiveBetsTableColumns {
   ITEM_ID = "itemId",
   VALUE = "value",
 }
+export const allActiveBetsTableColumns = Object.values(ActiveBetsTableColumns);
 
 // Used to help type the table interface
 type BaseTable = {

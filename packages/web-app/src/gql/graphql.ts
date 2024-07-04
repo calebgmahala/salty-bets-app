@@ -14,6 +14,21 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
+  DateTimeISO: { input: any; output: any; }
+};
+
+export type Fighter = {
+  __typename?: 'Fighter';
+  bestStreak: Scalars['Int']['output'];
+  createdTime: Scalars['DateTimeISO']['output'];
+  elo: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  lastUpdated: Scalars['DateTimeISO']['output'];
+  name: Scalars['String']['output'];
+  prevTier: Scalars['String']['output'];
+  tier: Scalars['String']['output'];
+  tierElo: Scalars['Int']['output'];
 };
 
 export type Item = {
@@ -21,6 +36,25 @@ export type Item = {
   color?: Maybe<Scalars['String']['output']>;
   id: Scalars['Float']['output'];
   name: Scalars['String']['output'];
+};
+
+export type Match = {
+  __typename?: 'Match';
+  betBlue: Scalars['Float']['output'];
+  betRed: Scalars['Float']['output'];
+  colour: Scalars['String']['output'];
+  date: Scalars['DateTimeISO']['output'];
+  fighterBlue: Fighter;
+  fighterBlueId: Scalars['Int']['output'];
+  fighterRed: Fighter;
+  fighterRedId: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  matchFormat: Scalars['String']['output'];
+  streakBlue: Scalars['Int']['output'];
+  streakRed: Scalars['Int']['output'];
+  tier: Scalars['String']['output'];
+  winner: Fighter;
+  winnerId: Scalars['Int']['output'];
 };
 
 export type Mutation = {
@@ -62,10 +96,22 @@ export type Player = {
 
 export type Query = {
   __typename?: 'Query';
+  getFighter: Fighter;
+  getMatch: Match;
   item: Item;
   items: Array<Item>;
   player: Player;
   players: Array<Player>;
+};
+
+
+export type QueryGetFighterArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryGetMatchArgs = {
+  id: Scalars['Int']['input'];
 };
 
 

@@ -13,6 +13,7 @@ export enum PlayersTableColumns {
   IS_ADMIN = "isAdmin",
   LOGIN_TOKEN = "loginToken",
 }
+export const allPlayersTableColumns = Object.values(PlayersTableColumns);
 
 // Used to help type the table interface
 type BaseTable = {

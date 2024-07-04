@@ -10,6 +10,10 @@ import { GraphQLError } from "graphql";
 
 @Resolver(Item)
 export class ItemResolver {
+  /**
+   * Gets a list of all the items
+   * @returns the list of all items in the DB
+   */
   @Query(() => [Item])
   async items(@Ctx() { knex }: ResolverContext) {
     logger.debug("getting items...");

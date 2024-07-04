@@ -11,6 +11,7 @@
   "scripts": {
     "prepare": "husky",
     "lint": "eslint --ext .ts,.tsx .",
+    "lint:cache": "eslint --cache --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "typecheck": "npm run --workspaces typecheck",
     "test": "vitest",
