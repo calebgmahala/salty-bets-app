@@ -18,7 +18,7 @@ export class ItemResolver {
   async items(@Ctx() { knex }: ResolverContext) {
     logger.debug("getting items...");
     const response = await new ItemService({ knex }).getItems();
-    logger.debug(
+    logger.info(
       `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
         response.length
       )} items`
@@ -34,13 +34,13 @@ export class ItemResolver {
     logger.debug({ id }, "getting item...");
     const response = await new ItemService({ knex }).getItem(id);
     if (response) {
-      logger.debug(
+      logger.info(
         `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
           response[ItemsTableColumns.NAME]
         )}`
       );
     } else {
-      logger.debug(
+      logger.error(
         `${chalk.redBright(
           "Failed"
         )} to find item with id:  ${chalk.yellowBright(id)}`
@@ -61,14 +61,14 @@ export class ItemResolver {
     logger.debug(input, "creating item...");
     try {
       const response = await new ItemService({ knex }).createItem(input);
-      logger.debug(
+      logger.info(
         `${chalk.greenBright("Success!")} created item ${chalk.yellowBright(
           response[ItemsTableColumns.NAME]
         )}`
       );
       return response;
     } catch (err) {
-      logger.debug(
+      logger.error(
         input,
         `${chalk.redBright("Failed")} to create item with given input`
       );

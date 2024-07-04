@@ -41,7 +41,7 @@ async function bootstrap() {
 
   // Start server
   await startStandaloneServer(server, {
-    listen: { port: 4000 },
+    listen: { port: import.meta.env.VITE_PORT ?? 4000 },
     // Define the context object passed to the resolver methods
     context: async ({ req }) => {
       return {

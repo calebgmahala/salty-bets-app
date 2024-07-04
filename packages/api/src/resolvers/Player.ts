@@ -18,7 +18,7 @@ export class PlayerResolver {
   async players(@Ctx() { knex }: ResolverContext) {
     logger.debug("getting players...");
     const response = await new PlayerService({ knex }).getPlayers();
-    logger.debug(
+    logger.info(
       `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
         response.length
       )} players`
@@ -41,13 +41,13 @@ export class PlayerResolver {
     const response = await new PlayerService({ knex }).getPlayer(id);
 
     if (response) {
-      logger.debug(
+      logger.info(
         `${chalk.greenBright("Success!")} got ${chalk.yellowBright(
           response[PlayersTableColumns.USERNAME]
         )}`
       );
     } else {
-      logger.debug(
+      logger.error(
         `${chalk.redBright(
           "Failed"
         )} to find player with id:  ${chalk.yellowBright(id)}`
@@ -75,7 +75,7 @@ export class PlayerResolver {
 
     try {
       const response = await new PlayerService({ knex }).createPlayer(input);
-      logger.debug(
+      logger.info(
         `${chalk.greenBright("Success!")} created player ${chalk.yellowBright(
           response[PlayersTableColumns.USERNAME]
         )}`
@@ -83,7 +83,7 @@ export class PlayerResolver {
 
       return response;
     } catch (err) {
-      logger.debug(
+      logger.error(
         input,
         `${chalk.redBright("Failed")} to create player with given input`
       );

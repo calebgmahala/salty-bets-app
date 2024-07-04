@@ -3,7 +3,7 @@ import chalk from "chalk";
 import { logger } from "../logger";
 
 const saltyBoy = axios.create({
-  baseURL: "https://salty-boy.com/api/",
+  baseURL: import.meta.env.VITE_SALTY_BOY_API_ENDPOINT,
   headers: {
     "Content-Type": "application/json",
   },
