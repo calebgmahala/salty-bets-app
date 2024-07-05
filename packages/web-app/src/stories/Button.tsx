@@ -1,1 +1,1 @@
-export const Button = () => <div>Hello World</div>
+export const Button = () => <div className="text-3xl font-bold underline">Hello World</div>
