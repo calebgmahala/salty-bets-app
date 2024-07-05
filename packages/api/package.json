@@ -25,7 +25,6 @@
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "vite-node ./src/index.ts",
-    "dev": "vite-node --watch ./src/index.ts",
-    "test": "vitest"
+    "dev": "vite-node --watch ./src/index.ts"
   }
 }
