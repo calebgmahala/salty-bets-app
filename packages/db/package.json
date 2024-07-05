@@ -20,8 +20,7 @@
     "build": "vite-node ./scripts/buildDb.ts",
     "delete": "vite-node ./scripts/deleteDb.ts",
     "reset": "npm run delete && npm run build",
-    "postinstall": "npm run build",
-    "test": "vitest"
+    "postinstall": "npm run build"
   },
   "type": "module"
 }

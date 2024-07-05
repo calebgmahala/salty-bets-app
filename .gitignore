@@ -96,3 +96,6 @@ dist/
 
 # DB files
 *.sqlite
+
+# Storybook
+*storybook.log
