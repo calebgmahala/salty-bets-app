@@ -1,4 +1,5 @@
 import { Field, ID, Int, ObjectType } from "type-graphql";
+import { Tier } from "./BasicTypes";
 
 @ObjectType()
 export class Fighter {
@@ -20,11 +21,11 @@ export class Fighter {
   @Field(() => String)
   name: string;
 
-  @Field(() => String)
-  prevTier: string;
+  @Field(() => Tier)
+  prevTier: Tier;
 
-  @Field(() => String)
-  tier: string;
+  @Field(() => Tier)
+  tier: Tier;
 
   @Field(() => Int)
   tierElo: number;

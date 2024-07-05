@@ -1,5 +1,6 @@
 import { Field, Float, ID, Int, ObjectType } from "type-graphql";
 import { Fighter } from "./Fighter";
+import { Color, MatchType, Tier } from "./BasicTypes";
 
 @ObjectType()
 export class Match {
@@ -9,8 +10,8 @@ export class Match {
   @Field(() => Float)
   betRed: number;
 
-  @Field(() => String)
-  colour: string;
+  @Field(() => Color)
+  colour: Color;
 
   @Field(() => Date)
   date: Date;
@@ -30,8 +31,8 @@ export class Match {
   @Field(() => ID)
   id: number;
 
-  @Field(() => String)
-  matchFormat: string;
+  @Field(() => MatchType)
+  matchFormat: MatchType;
 
   @Field(() => Int)
   streakBlue: number;
@@ -39,8 +40,8 @@ export class Match {
   @Field(() => Int)
   streakRed: number;
 
-  @Field(() => String)
-  tier: string;
+  @Field(() => Tier)
+  tier: Tier;
 
   @Field(() => Int)
   winnerId: number;

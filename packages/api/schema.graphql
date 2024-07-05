@@ -3,6 +3,12 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""The color options returned by the salty-boy api"""
+enum Color {
+  BLUE
+  RED
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
@@ -15,8 +21,8 @@ type Fighter {
   id: ID!
   lastUpdated: DateTimeISO!
   name: String!
-  prevTier: String!
-  tier: String!
+  prevTier: Tier!
+  tier: Tier!
   tierElo: Int!
 }
 
@@ -29,19 +35,26 @@ type Item {
 type Match {
   betBlue: Float!
   betRed: Float!
-  colour: String!
+  colour: Color!
   date: DateTimeISO!
   fighterBlue: Fighter!
   fighterBlueId: Int!
   fighterRed: Fighter!
   fighterRedId: Int!
   id: ID!
-  matchFormat: String!
+  matchFormat: MatchType!
   streakBlue: Int!
   streakRed: Int!
-  tier: String!
+  tier: Tier!
   winner: Fighter!
   winnerId: Int!
+}
+
+"""The type of match being played"""
+enum MatchType {
+  EXHIBITION
+  MATCHMAKING
+  TOURNAMENT
 }
 
 type Mutation {
@@ -65,4 +78,13 @@ type Query {
   items: [Item!]!
   player(id: Int!): Player!
   players: [Player!]!
+}
+
+"""The Tier of the match or of a fighter"""
+enum Tier {
+  A
+  B
+  P
+  S
+  X
 }
