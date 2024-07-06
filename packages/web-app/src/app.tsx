@@ -1,11 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ApolloAppProvider } from "./apollo/provider";
+import { Index } from "./pages/Index";
+import { Login } from "./pages/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="text-3xl font-bold underline">Hello world!</div>,
+    element: <Index />
   },
+  {
+    path: "/login",
+    element: <Login />
+  }
 ]);
 
 const App = () => {
