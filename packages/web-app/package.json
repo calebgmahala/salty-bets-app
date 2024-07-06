@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "dev": "concurrently \"npm run start\" \"npm run storybook\" --names \"app,storybook\" -c \"bgMagenta,bgGreen\"",
+    "generate": "graphql-codegen",
+    "start": "vite --host",
+    "dev": "concurrently \"npm run start\" \"npm run storybook\" \"npm run generate --watch src/**/*.tsx \" --names \"app,storybook,codegen\" -c \"bgMagenta,bgGreen,bgWhite\"",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -48,6 +49,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "postcss": "^8.4.39",
     "storybook": "^8.1.11",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"

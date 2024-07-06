@@ -1,8 +1,8 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: import.meta.env.VITE_API_ENDPOINT,
-  documents: ["./src/**/*.gql.tsx"],
+  schema: "http://localhost:4000",
+  documents: ["./src/**/*.gql.ts", "./src/**/*.gql.tsx"],
   generates: {
     "src/gql/": {
       preset: "client",

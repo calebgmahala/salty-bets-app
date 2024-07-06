@@ -1,21 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ApolloAppProvider } from "./apollo/provider";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div className="text-3xl font-bold underline">Hello world!</div>,
-  },
-]);
+import { Provider as RouterProvider } from "./routes/RouterProvider";
 
 const App = () => {
   return (
     <>
       <ApolloAppProvider>
-      <RouterProvider router={router} />
+        <RouterProvider />
       </ApolloAppProvider>
     </>
   );
-}
+};
 
 export default App;

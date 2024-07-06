@@ -18,6 +18,12 @@ export type Scalars = {
   DateTimeISO: { input: any; output: any; }
 };
 
+/** The color options returned by the salty-boy api */
+export enum Color {
+  Blue = 'BLUE',
+  Red = 'RED'
+}
+
 export type Fighter = {
   __typename?: 'Fighter';
   bestStreak: Scalars['Int']['output'];
@@ -26,8 +32,8 @@ export type Fighter = {
   id: Scalars['ID']['output'];
   lastUpdated: Scalars['DateTimeISO']['output'];
   name: Scalars['String']['output'];
-  prevTier: Scalars['String']['output'];
-  tier: Scalars['String']['output'];
+  prevTier: Tier;
+  tier: Tier;
   tierElo: Scalars['Int']['output'];
 };
 
@@ -42,20 +48,27 @@ export type Match = {
   __typename?: 'Match';
   betBlue: Scalars['Float']['output'];
   betRed: Scalars['Float']['output'];
-  colour: Scalars['String']['output'];
+  colour: Color;
   date: Scalars['DateTimeISO']['output'];
   fighterBlue: Fighter;
   fighterBlueId: Scalars['Int']['output'];
   fighterRed: Fighter;
   fighterRedId: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
-  matchFormat: Scalars['String']['output'];
+  matchFormat: MatchType;
   streakBlue: Scalars['Int']['output'];
   streakRed: Scalars['Int']['output'];
-  tier: Scalars['String']['output'];
+  tier: Tier;
   winner: Fighter;
   winnerId: Scalars['Int']['output'];
 };
+
+/** The type of match being played */
+export enum MatchType {
+  Exhibition = 'EXHIBITION',
+  Matchmaking = 'MATCHMAKING',
+  Tournament = 'TOURNAMENT'
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -124,6 +137,23 @@ export type QueryPlayerArgs = {
   id: Scalars['Int']['input'];
 };
 
+/** The Tier of the match or of a fighter */
+export enum Tier {
+  A = 'A',
+  B = 'B',
+  P = 'P',
+  S = 'S',
+  X = 'X'
+}
+
+export type LoginMutationVariables = Exact<{
+  username: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: string };
+
 export type CreatePlayerMutationVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
   username: Scalars['String']['input'];
@@ -139,6 +169,13 @@ export type PlayersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PlayersQuery = { __typename?: 'Query', players: Array<{ __typename?: 'Player', id: number, username: string, balance: number, isAdmin: boolean }> };
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
+
+export type LogoutMutation = { __typename?: 'Mutation', logout: { __typename?: 'Player', id: number } };
+
+
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const CreatePlayerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePlayer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"balance"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPlayer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}},{"kind":"Argument","name":{"kind":"Name","value":"balance"},"value":{"kind":"Variable","name":{"kind":"Name","value":"balance"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreatePlayerMutation, CreatePlayerMutationVariables>;
 export const PlayersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Players"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"players"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"balance"}},{"kind":"Field","name":{"kind":"Name","value":"isAdmin"}}]}}]}}]} as unknown as DocumentNode<PlayersQuery, PlayersQueryVariables>;
+export const LogoutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>;
