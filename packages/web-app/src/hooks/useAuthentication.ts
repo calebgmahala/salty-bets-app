@@ -14,7 +14,7 @@ export const useAuthentication = () => {
     doLogout()
     localStorage.removeItem("auth_token")
     client.resetStore();
-  }, [client]);
+  }, [doLogout]);
 
   const isLoggedIn = !!authToken;
 

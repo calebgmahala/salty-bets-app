@@ -20,7 +20,7 @@ export const LoginForm = () => {
         setAuthToken(login)
       }
     })
-  }, [username, password, setAuthToken]);
+  }, [username, password, setAuthToken, login]);
   return (
     <div>
       <input
