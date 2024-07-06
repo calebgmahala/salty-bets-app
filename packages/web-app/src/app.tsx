@@ -1,27 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ApolloAppProvider } from "./apollo/provider";
-import { Index } from "./pages/Index";
-import { Login } from "./pages/Login";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Index />
-  },
-  {
-    path: "/login",
-    element: <Login />
-  }
-]);
+import { Provider as RouterProvider } from "./routes/RouterProvider";
 
 const App = () => {
   return (
     <>
       <ApolloAppProvider>
-      <RouterProvider router={router} />
+        <RouterProvider />
       </ApolloAppProvider>
     </>
   );
-}
+};
 
 export default App;

@@ -1,11 +1,14 @@
-import { usePlayers } from "../components/useGetPlayers.gql";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../stories/Button";
 import { SaltyBetsR } from "../stories/icons";
 import { SaltyBetsB } from "../stories/icons/SaltyBetsB";
 import imgUrl from "/assets/background.png?url";
 
-export const Index = () => {
-  usePlayers()
+export const Auth = () => {
+  const navigate = useNavigate();
+  const onBlueClick = () => {
+    navigate("/login")
+  }
   return (
     <main className="h-screen w-screen flex flex-col">
       <header className="bg-white h-96 w-full"></header>
@@ -21,7 +24,7 @@ export const Index = () => {
           <SaltyBetsR className="h-56 mr-1" />
           IGN UP
         </Button>
-        <Button className="text-9xl w-full bg-white">
+        <Button onClick={onBlueClick} className="text-9xl w-full bg-white">
           <SaltyBetsB className="h-56 mr-1" />
           OOL
         </Button>
